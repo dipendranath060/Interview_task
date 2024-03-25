@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Url;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class UrlController extends Controller
 {
@@ -12,7 +14,7 @@ class UrlController extends Controller
      */
     public function index()
     {
-        return view('Backend.dashboard');
+        return view('Backend.short-urls.index');
     }
 
     /**
@@ -20,7 +22,7 @@ class UrlController extends Controller
      */
     public function create()
     {
-        //
+        return view('Backend.short-urls.create');
     }
 
     /**
@@ -28,23 +30,28 @@ class UrlController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([  
+            'link' => 'required|url'  
+         ]);  
+      
+        //  $input['link'] = $request->link;  
+        //  $input['code'] = str_random(6);  
+      
+        //  Url::create($input);  
+        $urls = new Url();
+        $urls->link = $request->link;
+        $urls->code = $request->str_random(6);
+         return redirect('add-short-url')  
+              ->with('success', 'Shorten Link Generated Successfully!'); 
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
      */
     public function edit(string $id)
     {
-        //
+        return view('Backend.short-urls.edit');
     }
 
     /**
@@ -62,4 +69,13 @@ class UrlController extends Controller
     {
         //
     }
-}
+
+    public function find($code)  
+    {  
+     
+        $find = Url::where('code', $code)->first();  
+     
+        return redirect($find->link);  
+    } 
+} 
+

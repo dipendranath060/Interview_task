@@ -15,8 +15,8 @@
         </div>
   
         <!-- Menu -->
-          <li class="menu-item mb-2 {{request()->is('admin/shorter-urls')|| request()->is('admin/add-shorter-url')|| request()->is('admin/edit-shorter-url*') ? 'active-page' : ''}}">
-            <a href="" class="text-decoration-none d-block">
+          <li class="menu-item mb-2 {{request()->is('admin/get-short-urls')|| request()->is('admin/add-shorter-url')|| request()->is('admin/edit-shorter-url*') ? 'active-page' : ''}}">
+            <a href="{{route('get-short-urls')}}" class="text-decoration-none d-block">
               <img src="{{asset('assets/icons/team.svg')}}" alt="" class="mb-1" />
               <span class="menu-title d-block m-0">shorter-url</span>
             </a>
