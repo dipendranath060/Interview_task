@@ -28,10 +28,10 @@
             @endif
             <div class="col-lg-10 overflow-auto">
                 <div class="text-end mb-3">
-                    <a href="{{route('add-Urls')}}" class="btn btn-success">+ Add New Short Urls</a>
+                    <a href="{{route('add-short-url')}}" class="btn btn-success">+ Add New Short Urls</a>
                 </div>
-                {{-- @if ($Urls->isEmpty()) --}}
-                    <h4 class="text-black text-center">No Url List Not Found....</h4>
+                @if ($urls->isEmpty())
+                    <h4 class="text-black text-center">No Url List Found....</h4>
                 @else
                 <table class="w-100 bg-white text-center" id="table-list">
                     <tr class="border-top border-bottom">
@@ -40,10 +40,11 @@
                         <th class="py-3 px-1">Link</th>
                         <th class="py-3 px-1">Action</th>
                     </tr>
-                    {{-- @foreach ($Urls as $url) --}}
-                    {{-- <tr>
+                    @foreach ($urls as $url)
+                    <tr>
                         <td class="py-3 px-1">{{$loop->iteration}}</td>
-                        <td class="py-3 px-1">{{Str::limit($url->title,40)}}</td>
+                        <td class="py-3 px-1">{{Str::limit($url->code,40)}}</td>
+                        <td class="py-3 px-1">{{ $url->link}}</td>
                             <td class="py-3 px-1">
                                 <a href="{{ url('admin/edit-short-url/'.$url->id) }}" class="btn btn-success mb-1">Edit</a>
                                 <button type="button" class="btn btn-danger mb-1" data-bs-toggle="modal" data-bs-target="#deleteModal_{{ $url->id }}">
@@ -51,9 +52,9 @@
                                 </button>
                             </td>
                         </td>
-                    </tr> --}}
+                    </tr>
                     {{-- modal starts --}}
-                    {{-- <div class="modal fade" id="deleteModal_{{ $url->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal fade" id="deleteModal_{{ $url->id }}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
@@ -74,10 +75,10 @@
                             </div>
                         </div>
                     </div>
-                    @endforeach --}}
+                    @endforeach
                 </table>
-                {{-- {{ $urls->links() }} --}}
-                {{-- @endif   --}}
+                {{ $urls->links() }}
+                @endif  
             </div>
         </div>
     </div>

@@ -14,7 +14,8 @@ class UrlController extends Controller
      */
     public function index()
     {
-        return view('Backend.short-urls.index');
+        $urls = Url::paginate(10);
+        return view('Backend.short-urls.index', compact('urls'));
     }
 
     /**
@@ -31,7 +32,7 @@ class UrlController extends Controller
     public function store(Request $request)
     {
         $request->validate([  
-            'link' => 'required|url'  
+            'link' => 'required|url|unique:shorturls'  
          ]);  
       
         //  $input['link'] = $request->link;  
@@ -40,9 +41,10 @@ class UrlController extends Controller
         //  Url::create($input);  
         $urls = new Url();
         $urls->link = $request->link;
-        $urls->code = $request->str_random(6);
-         return redirect('add-short-url')  
-              ->with('success', 'Shorten Link Generated Successfully!'); 
+        $urls->code = $request->code;
+        $urls->save();
+         return redirect()->route('get-short-urls')  
+              ->with('message', 'Shorten Link Generated Successfully!'); 
     }
 
 
@@ -51,7 +53,11 @@ class UrlController extends Controller
      */
     public function edit(string $id)
     {
-        return view('Backend.short-urls.edit');
+        $url = Url::findOrFail($id);
+        if($url)
+        {
+            return view('Backend.short-urls.edit', compact('url'));
+        }
     }
 
     /**
@@ -59,7 +65,19 @@ class UrlController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $request->validate([  
+            'link' => 'required|url'  
+         ]);  
+       
+        $urls = Url::findOrFail($id);
+        if($urls)
+        {
+            $urls->link = $request->link;
+            $urls->code = $request->code;
+            $urls->update();
+             return redirect()->route('get-short-urls')  
+                  ->with('message', 'Shorten Link Updated Successfully!'); 
+        }
     }
 
     /**

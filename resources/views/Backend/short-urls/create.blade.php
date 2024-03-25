@@ -9,7 +9,7 @@
         <nav aria-label="breadcrumb" class="p-2 bg-white breadcrumb-main rounded">
             <ol class="breadcrumb m-0 justify-content-start">
                 <li class="breadcrumb-item"><a href="{{route('dashboard')}}">Dashboard</a></li>
-                <li class="breadcrumb-item active" aria-current="page">Short-Urls</li>
+                <li class="breadcrumb-item"><a href="{{route('get-short-urls')}}">All Urls</a></li>
                 <li class="breadcrumb-item active" aria-current="page">Add Short-Urls</li>
             </ol>
         </nav>
@@ -31,8 +31,8 @@
                     <form action="{{url('admin/add-short-url')}}" method="POST">
                         @csrf
                         <div class="mb-3">
-                            <label for="code" class="fs-5 mb-2">Code</label>
-                            <input type="text" name="code" id="code" value="{{old('code')}}" class="w-100" placeholder="Enter Code..." required>
+                            <label for="code" class="fs-5 mb-2">Code</label><br>
+                            <textarea id="code" name="code" class="w-100" rows="5" placeholder="Enter Code...">{{old('code')}}</textarea>
                         </div>
                     
                         <div class="d-flex align-items-center gap-2">
@@ -42,7 +42,7 @@
                             </div>
 
                         </div>
-                        <button type="submit" class="btn btn-primary mb-1">Add Banner</button>
+                        <button type="submit" class="btn btn-primary mb-1">Add Short-Link</button>
                         <button class="btn btn-danger mb-1" type="reset" onclick="reset_content()">Reset Content</button>
                     </form>
                 </div>
