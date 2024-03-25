@@ -20,7 +20,7 @@
 
 <section class="dashboard-details mb-3">
   <div class="container">
-    <h3 class="mb-4" id="user">Welcome,</h3>
+    <h3 class="mb-4" id="user">Welcome, {{auth()->user()->name}}</h3>
     <div class="row">
         <!-- Weather -->
         <div class="col-lg-8 mb-3">

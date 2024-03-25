@@ -45,6 +45,7 @@ class UrlController extends Controller
         $url = new Url();
         $url->code = $request->code;
         $url->link = $shortCode;
+        // $url->link = $request->link;
 
         $url->save();
          return redirect()->route('get-short-urls')  
@@ -53,7 +54,7 @@ class UrlController extends Controller
 
     protected function generateShortCode()
     {
-        return substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"), 0, 6);
+        return substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"), 0, 10);
     }
 
 
