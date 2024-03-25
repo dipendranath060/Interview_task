@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Url;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
+use AshAllenDesign\ShortURL\Facades\ShortURL;
 
 class UrlController extends Controller
 {
@@ -39,12 +39,21 @@ class UrlController extends Controller
         //  $input['code'] = str_random(6);  
       
         //  Url::create($input);  
-        $urls = new Url();
-        $urls->link = $request->link;
-        $urls->code = $request->code;
-        $urls->save();
+
+        $shortCode = $this->generateShortCode();
+
+        $url = new Url();
+        $url->code = $request->code;
+        $url->link = $shortCode;
+
+        $url->save();
          return redirect()->route('get-short-urls')  
               ->with('message', 'Shorten Link Generated Successfully!'); 
+    }
+
+    protected function generateShortCode()
+    {
+        return substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"), 0, 6);
     }
 
 
@@ -57,6 +66,9 @@ class UrlController extends Controller
         if($url)
         {
             return view('Backend.short-urls.edit', compact('url'));
+        }else{
+            return redirect()->route('get-short-urls')  
+                  ->with('message', 'No Such ID Found !!!'); 
         }
     }
 
@@ -85,15 +97,16 @@ class UrlController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $urls = Url::findOrFail($id);
+        if($urls)
+        {
+            $urls->delete();
+            return redirect()->route('get-short-urls')  
+                  ->with('message', 'Shorten Link Deleted Successfully!'); 
+        }else{
+            return redirect()->route('get-short-urls')  
+                  ->with('message', 'No Such ID Found !!!'); 
+        }
     }
-
-    public function find($code)  
-    {  
-     
-        $find = Url::where('code', $code)->first();  
-     
-        return redirect($find->link);  
-    } 
 } 
 

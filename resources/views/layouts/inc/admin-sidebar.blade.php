@@ -21,8 +21,6 @@
               <span class="menu-title d-block m-0">shorter-url</span>
             </a>
           </li>
-
-      
-        
+          
         </ul>
       </div>
