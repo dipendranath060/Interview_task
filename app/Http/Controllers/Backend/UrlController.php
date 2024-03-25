@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Backend;
 
-use App\Models\Url;
+use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class UrlController extends Controller
@@ -12,7 +12,7 @@ class UrlController extends Controller
      */
     public function index()
     {
-        //
+        return view('Backend.dashboard');
     }
 
     /**
@@ -34,7 +34,7 @@ class UrlController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Url $url)
+    public function show(string $id)
     {
         //
     }
@@ -42,7 +42,7 @@ class UrlController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Url $url)
+    public function edit(string $id)
     {
         //
     }
@@ -50,7 +50,7 @@ class UrlController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Url $url)
+    public function update(Request $request, string $id)
     {
         //
     }
@@ -58,7 +58,7 @@ class UrlController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Url $url)
+    public function destroy(string $id)
     {
         //
     }
