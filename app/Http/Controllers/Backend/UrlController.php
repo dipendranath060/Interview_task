@@ -33,7 +33,7 @@ class UrlController extends Controller
     public function store(Request $request)
     {
         $request->validate([  
-            'original_url' => 'required|url|unique:shorturls',  
+            'original_url' => 'required|url',  
             'short_url' => 'required|url'  
          ]);  
       
@@ -88,8 +88,8 @@ class UrlController extends Controller
         $urls = Url::findOrFail($id);
         if($urls)
         {
-            $urls->link = $request->link;
-            $urls->code = $request->code;
+            $urls->original_url = $request->original_url;
+            $urls->short_url = Str::random(5);
             $urls->update();
              return redirect()->route('get-short-urls')  
                   ->with('message', 'Shorten Link Updated Successfully!'); 
