@@ -59,6 +59,15 @@
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
+
+                            <div class="col-md-6">
+                                <label for="role" class="fs-5 mb-2">User Role</label><br>
+                                <select name="role_as" id="role" class="py-2 me-5">
+                                    <option value="1">Select User Role</option>
+                                    <option value="1">Admin</option>
+                                    <option value="2">Super Admin</option>
+                                </select>
+                            </div>
                         </div>
 
                         <div class="row mb-0">

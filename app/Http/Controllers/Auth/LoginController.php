@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -25,7 +26,24 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    public function authenticated()
+    {
+        if(Auth::user()->role_as == '1') //1 ==superAdmin
+        {
+            return redirect('admin/dashboard')
+                    ->with('status', 'Welcome SuperAdmin To NGO System');
+        }
+        elseif(Auth::user()->role_as == '0') //0==admin
+        {
+            return redirect('admin/dashboard')
+                    ->with('status', 'Welcome To NGO System');  
+        }
+        else
+        {
+            return redirect('/login')
+                    ->with('status', 'Welcome To login'); 
+        }
+    }
 
     /**
      * Create a new controller instance.

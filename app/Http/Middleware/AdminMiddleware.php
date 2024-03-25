@@ -16,12 +16,23 @@ class AdminMiddleware
      */
     public function handle(Request $request, Closure $next, ...$roles): Response
     {
-        $user = Auth::user();
+        if (Auth::check())
+        {
+            $allowedRoles = ['0', '1'];  // 0 = for Admin and 1 = For super Admin
+            $role = Auth::user()->role_as;
 
-        if ($user && in_array($user->role, $roles)) {
-            return $next($request);
+            if (in_array($role, $allowedRoles))
+            {
+                return $next($request);
+            }
+            else
+            {
+                return redirect('/home')->with('error', 'Unauthorized Access');
+            }
         }
-
-        abort(403, 'Unauthorized action.');
+        else
+        {
+            return redirect('/login')->with('status', 'OOPS..Please Login First');
+        }
     }
 }

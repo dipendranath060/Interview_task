@@ -3,7 +3,6 @@
         <div class="user position-relative">
             <img src="{{asset('assets/icons/user.svg')}}" alt="" class="usericon">
             <ul class="list-unstyled user-dropdown">
-                <li class="drop-item py-1"><a href="" class="text-decoration-none text-black">Profile</a></li>
                 <li class="drop-item py-1 text-black" data-bs-toggle="modal" data-bs-target="#logoutmodal">Logout</li>
             </ul>
         </div>
@@ -22,12 +21,12 @@
 
                 <div class="modal-footer border-0">
                     <button type="button" class="btn btn-danger" data-bs-dismiss="modal">No</button>
-                    <button type="button" class="btn btn-primary"> <a href="" class="text-white text-decoration-none"
+                    <button type="button" class="btn btn-primary"> <a href="{{route('logout')}}" class="text-white text-decoration-none"
                         onclick="event.preventDefault();
                                       document.getElementById('logout-form').submit();">
                          {{ __('Logout') }}
                         </a>
-                        <form id="logout-form" action="" method="POST" class="d-none">
+                        <form id="logout-form" action="{{route('logout')}}" method="POST" class="d-none">
                             @csrf
                         </form>
                     </li>

@@ -5,7 +5,7 @@
           id="menu-top"
         >
           <div class="logo d-none" id="logo">
-            <a href="{{route('short-urls')}}">
+            <a href="{{route('dashboard')}}">
             <img src="{{asset('assets/icons/logomain.png')}}" alt="logo" class="w-100" />
           </a>
           </div>

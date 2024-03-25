@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\Backend\UrlController;
+use App\Http\Controllers\HomeController;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,16 +19,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('login', [\App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
-Route::post('login', [\App\Http\Controllers\Auth\LoginController::class, 'login']);
+Route::prefix('admin')->middleware(['auth', 'isAdmin'])->group(function(){
 
-Route::prefix('admin')->middleware(['auth', 'isAdmin:superadmin,admin'])->group(function(){
-
-    Route::get('/dashboard', [UrlController::class, 'index'])->name('short-urls');
+    Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
+    Route::post('logout', [\App\Http\Controllers\Auth\LoginController::class, 'logout']);
 });
 
 
-// Auth::routes();
+
 
