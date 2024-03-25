@@ -37,14 +37,16 @@
                     <tr class="border-top border-bottom">
                         <th class="py-3 px-1">S.N</th>
                         <th class="py-3 px-1">Code</th>
-                        <th class="py-3 px-1">Link</th>
+                        <th class="py-3 px-1">Original Url</th>
+                        <th class="py-3 px-1">Short Url</th>
                         <th class="py-3 px-1">Action</th>
                     </tr>
                     @foreach ($urls as $url)
                     <tr>
                         <td class="py-3 px-1">{{$loop->iteration}}</td>
                         <td class="py-3 px-1">{{Str::limit($url->code,40)}}</td>
-                        <td class="py-3 px-1">{{ $url->link}}</td>
+                        <td class="py-3 px-1">{{ $url->original_url}}</td>
+                        <td class="py-3 px-1">{{ $url->short_url}}</td>
                             <td class="py-3 px-1">
                                 <a href="{{ url('admin/edit-short-url/'.$url->id) }}" class="btn btn-success mb-1">Edit</a>
                                 <button type="button" class="btn btn-danger mb-1" data-bs-toggle="modal" data-bs-target="#deleteModal_{{ $url->id }}">

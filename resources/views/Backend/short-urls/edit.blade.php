@@ -38,8 +38,16 @@
                     
                         <div class="d-flex align-items-center gap-2">
                             <div class="mb-3">
-                                <label for="link" class="fs-5 mb-2">Link</label>
-                                <input type="text" name="link" id="link" value="{{$url->link}}" class="w-100" placeholder="Enter Link..." required>
+                                <label for="link" class="fs-5 mb-2">Original Url</label>
+                                <input type="text" name="link" id="link" value="{{$url->original_url}}" class="w-100" placeholder="Enter Link..." required>
+                            </div>
+
+                        </div>
+
+                        <div class="d-flex align-items-center gap-2">
+                            <div class="mb-3">
+                                <label for="link" class="fs-5 mb-2">Short Url</label>
+                                <input type="text" name="link" id="link" value="{{$url->short_url}}" class="w-100" placeholder="Enter Link..." required>
                             </div>
 
                         </div>

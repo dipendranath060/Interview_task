@@ -37,8 +37,15 @@
                     
                         <div class="d-flex align-items-center gap-2">
                             <div class="mb-3">
-                                <label for="link" class="fs-5 mb-2">Link</label>
-                                <input type="text" name="link" id="link" value="{{old('link')}}" class="w-100" placeholder="Enter Link..." required>
+                                <label for="link" class="fs-5 mb-2">Original Url</label>
+                                <input type="text" name="original_url" id="link" value="{{old('link')}}" class="w-100" placeholder="Enter Link..." required>
+                            </div>
+
+                        </div>
+                        <div class="d-flex align-items-center gap-2">
+                            <div class="mb-3">
+                                <label for="link" class="fs-5 mb-2">Short Url</label>
+                                <input type="text" name="short_url" id="link" value="{{old('link')}}" class="w-100" placeholder="Enter Link..." required>
                             </div>
 
                         </div>

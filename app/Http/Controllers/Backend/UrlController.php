@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use App\Models\Url;
 use Illuminate\Http\Request;
-use AshAllenDesign\ShortURL\Facades\ShortURL;
+use Illuminate\Support\Str;
+
 
 class UrlController extends Controller
 {
@@ -32,7 +33,8 @@ class UrlController extends Controller
     public function store(Request $request)
     {
         $request->validate([  
-            'link' => 'required|url|unique:shorturls'  
+            'original_url' => 'required|url|unique:shorturls',  
+            'short_url' => 'required|url'  
          ]);  
       
         //  $input['link'] = $request->link;  
@@ -44,8 +46,9 @@ class UrlController extends Controller
 
         $url = new Url();
         $url->code = $request->code;
-        $url->link = $shortCode;
-        // $url->link = $request->link;
+        // $url->link = $shortCode;
+        $url->original_url = $request->original_url;
+        $url->short_url = Str::random(5);
 
         $url->save();
          return redirect()->route('get-short-urls')  

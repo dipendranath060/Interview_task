@@ -11,6 +11,7 @@ class Url extends Model
     protected $table = 'shorturls';
     protected $fillable = [
         'code',
-        'link',
+        'original_url',
+        'short_url',
     ];
 }

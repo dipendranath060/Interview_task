@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('shorturls', function (Blueprint $table) {
             $table->id();
             $table->string('code');
-            $table->string('link');
+            $table->string('original_url');
+            $table->string('short_url');
             $table->timestamps();
         });
     }
