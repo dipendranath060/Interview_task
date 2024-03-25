@@ -41,23 +41,15 @@ class UrlController extends Controller
         //  $input['code'] = str_random(6);  
       
         //  Url::create($input);  
-
-        $shortCode = $this->generateShortCode();
-
+        
         $url = new Url();
         $url->code = $request->code;
-        // $url->link = $shortCode;
         $url->original_url = $request->original_url;
         $url->short_url = Str::random(5);
 
         $url->save();
          return redirect()->route('get-short-urls')  
               ->with('message', 'Shorten Link Generated Successfully!'); 
-    }
-
-    protected function generateShortCode()
-    {
-        return substr(str_shuffle("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"), 0, 10);
     }
 
 
